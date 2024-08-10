@@ -39,6 +39,10 @@ const NavButton = styled.button`
         background-color: #26BBFF;
         color: #353539;
     }
+
+    &:nth-of-type(4):hover {
+        background-color: #72D3FF;
+    }
 `;
 
 export default function NavigationBar() {
