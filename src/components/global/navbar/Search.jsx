@@ -15,15 +15,20 @@ const SearchInput = styled.input`
     height: 80%;
     box-sizing: border-box;
     border-radius: 25px;
-    padding: 0px 10px;
+    padding: 0px 20px;
     background-color: #202024;
     color: #FFFFFF;
+
+    &::placeholder {
+        color: #B1B1B3;
+        font-weight: 600;
+    }
 `;
 
 export default function Search() {
   return (
         <SearchForm>
-            <SearchInput name="query" />
+            <SearchInput name="query" placeholder='Search store'/>
         </SearchForm>
   )
 }

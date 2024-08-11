@@ -18,7 +18,7 @@ const Nav = styled.nav`
     gap: 15px;
 `;
 
-const NavButton = styled.button`
+const LinkNav = styled(Link)`
     background-color: #353539;
     color: #FAFAFA;
     font-size: 1em;
@@ -49,11 +49,11 @@ export default function NavigationBar() {
     return (
         <Header>
             <Nav>
-                <NavButton>LOGO</NavButton>
-                <NavButton><Link to='/'>STORE</Link></NavButton>
+                <LinkNav>LOGO</LinkNav>
+                <LinkNav to='/'>STORE</LinkNav>
                 <Search />
-                <NavButton><Link to='/wishlist'>WISHLIST</Link></NavButton>
-                <NavButton><Link to='/cart'>CART</Link></NavButton>
+                <LinkNav to='/wishlist'>WISHLIST</LinkNav>
+                <LinkNav to='/cart'>CART</LinkNav>
             </Nav>
         </Header>
     )
