@@ -2,9 +2,7 @@ import React from 'react';
 import { Outlet, Link, useLoaderData, Form, redirect, useNavigation, useSubmit, } from "react-router-dom";
 import Search from './Search';
 import styled from 'styled-components';
-
-const Header = styled.header`
-`;
+import { Globe } from 'lucide-react';
 
 const Nav = styled.nav`
     height: 100%;
@@ -15,20 +13,23 @@ const Nav = styled.nav`
 
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 20px;
 `;
 
 const LinkNav = styled(Link)`
-    background-color: #353539;
     color: #FAFAFA;
     font-size: 1em;
     font-weight: 600;
-    padding: 10px 20px;
-    border-radius: 8px;
+    border-radius: 5px;
     cursor: pointer;
 
-    &:hover {
-        background-color: #656567;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:hover,
+    &:focus-visible {
+        color: #0078f2;
     }
 
     &:nth-of-type(3) {
@@ -36,25 +37,74 @@ const LinkNav = styled(Link)`
     }
 
     &:nth-of-type(4) {
-        background-color: #26BBFF;
-        color: #353539;
+        display: flex;
+        gap: 8px;
     }
 
-    &:nth-of-type(4):hover {
-        background-color: #72D3FF;
+    &:nth-of-type(4):hover,
+    &:nth-of-type(4):focus-visible {
+        color: #FAFAFA;
+        opacity: 0.8;
     }
+
+    &:nth-of-type(5) {
+        padding: 6px 12px;
+        background-color: #26BBFF;
+        font-size: 1.1rem;
+        color: #10181b;
+        display: flex;
+    }
+
+    &:nth-of-type(5):hover,
+    &:nth-of-type(5):focus-visible {
+        background-color: #72d3ff;
+    }
+`;
+
+const UserIcon = styled.div`
+    position: relative;
+
+    width: 30px;
+    height: 30px;
+    background-color: #404044;
+    border-radius: 50%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`;
+
+const UserInitial = styled.p`
+    font-size: 1.1rem;
+`;
+
+const UserActivityIcon = styled.div`
+    position: absolute;
+    right: -5%;
+    bottom: -5%;
+    width: 7px;
+    height: 7px;
+    background-color: #A9D34F;
+    border: 2px solid #121216;
+    border-radius: 50%;
 `;
 
 export default function NavigationBar() {
     return (
-        <Header>
+        <header>
             <Nav>
                 <LinkNav>LOGO</LinkNav>
                 <LinkNav to='/'>STORE</LinkNav>
-                <Search />
-                <LinkNav to='/wishlist'>WISHLIST</LinkNav>
-                <LinkNav to='/cart'>CART</LinkNav>
+                <LinkNav to='/'><Globe size={22} /></LinkNav>
+                <LinkNav to='/profile'>
+                    <UserIcon>
+                        <UserInitial>u</UserInitial>
+                        <UserActivityIcon />
+                    </UserIcon>
+                    user
+                </LinkNav>
+                <LinkNav to='/'>Download</LinkNav>
             </Nav>
-        </Header>
+        </header>
     )
 }
