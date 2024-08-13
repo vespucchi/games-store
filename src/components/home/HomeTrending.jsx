@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import CarouselSwiperSlider from '../global/sliders/CarouselSwiperSlider';
+import CarouselSwiperSlider from './CarouselSwiperSlider';
 
 export default function HomeTrending({ games }) {
 
