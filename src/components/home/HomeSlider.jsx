@@ -8,6 +8,7 @@ const GridContainer = styled.div`
     height: 70vh;
     display: grid;
     grid-template-columns: 8fr 2fr;
+    margin-top: -50px;
 `;
 
 const SelectedGame = styled.div`

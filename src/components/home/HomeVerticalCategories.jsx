@@ -6,6 +6,7 @@ const Container = styled.div`
     display: flex;
     height: 800px;
     gap: 16px;
+    margin-bottom: 100px;
 
     & > div:nth-child(1),
     & > div:nth-child(2) {
