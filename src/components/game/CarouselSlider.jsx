@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import PropTypes from 'prop-types';
 import { ChevronRight } from 'lucide-react';
@@ -15,6 +15,8 @@ const CarousalContainer = styled.div`
 `;
 
 const ActiveImage = styled.div`
+    max-height: 500px;
+    height: 70vh;
     width: 100%;
     border-radius: 15px;
 
@@ -111,6 +113,12 @@ const QueueItem = styled.button`
 
 export default function CarouselSlider({ images }) {
     const [activeImageIndex, setActiveImageIndex] = useState(0);
+
+    useEffect(() => {
+        if (images.length > 5) {
+            images.splice(5, images.length - 5);
+        }
+    }, [images]);
     
     return (
         <CarousalContainer>
