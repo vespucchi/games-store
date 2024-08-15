@@ -3,14 +3,14 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 const Container = styled.div`
-   width: 95%;
-   height: 500px;
+   width: 90%;
+   min-height: 500px;
+   height: fit-content;
    background-color: #202024;
    border-radius: 20px;
    margin-left: auto;
    margin-right: auto;
 
-   box-sizing: border-box;
    padding: 2%;
 
    display: flex;
@@ -59,13 +59,13 @@ const CardItem = styled(Link)`
 
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr auto;
+    grid-template-rows: 4fr 1fr;
     gap: 10px;
 
     cursor: pointer;
 
-    &:hover > *,
-    &:focus > * {
+    &:hover *,
+    &:focus * {
         color: #d3d3d3;
     }
 `;
@@ -75,6 +75,9 @@ const CardImage = styled.div`
     overflow: hidden;
 
     position: relative;
+
+    background-size: cover;
+    background-position: center;
 
     &:hover,
     &:focus {
@@ -103,18 +106,26 @@ const GameSoon = styled(GameFree)`
     background-color: black;
 `;
 
+const CardInfo = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+`;
+
 const CardTitle = styled.h2`
     color: white;
     font-size: 1.2rem;
 `;
 
-const CardInfo = styled.p`
+const CardDate = styled.p`
     color: #B1B1B3;
     font-size: 1.1rem;
     font-weight: 600;
 `;
 
 export default function HomeFreeGames({ games }) {
+    const sliceArrayAtIndex = Math.random() * 14;
+
     return (
         <Container>
             <Header>
@@ -122,26 +133,17 @@ export default function HomeFreeGames({ games }) {
                 <ViewMoreBtn to='/collection/free-games'>View More</ViewMoreBtn>
             </Header>
             <CardsContainer>
-                {games.slice(0, 3).map((game) => (
-                    <CardItem to={`/game/${game.title}`} aria-label='Game item' key={game.title}>
+                {games.slice(sliceArrayAtIndex, sliceArrayAtIndex + 5).map((game, index) => (
+                    <CardItem to={`/game/${game.name.replaceAll(' ', '-').toLowerCase()}`} aria-label='Game item' key={game.id}>
                         <CardImage style={{
-                            backgroundImage: `url(${game.image})`
+                            backgroundImage: `url(${game.background_image})`
                         }}>
-                            <GameFree>FREE NOW</GameFree>
+                            {index > 2 ? (<GameSoon>COMING SOON</GameSoon>) : <GameFree>FREE NOW</GameFree>}
                         </CardImage>
-                        <CardTitle>{game.title}</CardTitle>
-                        <CardInfo>Free Now - Aug 15</CardInfo>
-                    </CardItem>
-                ))}
-                {games.slice(-2).map((game) => (
-                    <CardItem to={`/game/${game.title}`} aria-label='Game item' key={game.title}>
-                        <CardImage style={{
-                            backgroundImage: `url(${game.image})`
-                        }}>
-                            <GameSoon>COMING SOON</GameSoon>
-                        </CardImage>
-                        <CardTitle>{game.title}</CardTitle>
-                        <CardInfo>Free Aug 15 - Aug 22</CardInfo>
+                        <CardInfo>
+                            <CardTitle>{game.name}</CardTitle>
+                            <CardDate>Free Now - Aug 15</CardDate>
+                        </CardInfo>
                     </CardItem>
                 ))}
             </CardsContainer>

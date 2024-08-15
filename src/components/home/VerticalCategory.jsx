@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { ChevronRight } from 'lucide-react';
 
 const CategoryItem = styled.div`
     height: 100%;
@@ -13,21 +14,23 @@ const CategoryItem = styled.div`
     padding-right: 16px;
 `;
 
-const Heading = styled.div`
+const HeadingContainer = styled.div`
     color: white;
     width: 100%;
+`;
 
+const Heading = styled(Link)`
+    width: fit-content;
     display: flex;
     align-items: center;
+    gap: 4px;
 
-    & > h1 {
-        font-size: 1.5rem;
+    & > svg {
+        transition: transform 0.1s ease-in;
     }
 
-    & > div {
-        margin-left: auto;
-        display: flex;
-        gap: 10px;
+    &:hover > svg {
+        transform: translateX(4px);
     }
 `;
 
@@ -66,6 +69,9 @@ const GameImage = styled.div`
     border-radius: 5px;
     height: 100%;
     width: 80%;
+
+    background-size: cover;
+    background-position: center;
 `;
 
 const GameInfo = styled.div`
@@ -93,26 +99,32 @@ const GameInfo = styled.div`
 `;
 
 export default function VerticalCategory({ title, games, released }) {
+    const collectionPath = title.replaceAll(' ', '-').toLowerCase();
+    const sliceArrayAtIndex = Math.random() * 14;
+
     return (
         <CategoryItem>
-            <Heading>
-                <Title>{title}</Title>
-            </Heading>
+            <HeadingContainer>
+                <Heading to={`/collection/${collectionPath}`} aria-label='Heading' >
+                    <Title>{title}</Title>
+                    <ChevronRight />
+                </Heading>
+            </HeadingContainer>
             <GamesList>
-                {games.slice(0, 5).map((game) => (
-                    <GameItem key={game.title} to={`/game/gameId`}>
+                {games.slice(sliceArrayAtIndex, sliceArrayAtIndex + 5).map((game) => (
+                    <GameItem key={game.name} to={`/game/${game.name.replaceAll(' ', '-').toLowerCase()}`}>
                         <GameImage style={{
-                            backgroundImage: `url(${game.image})`
+                            backgroundImage: `url(${game.background_image})`
                         }} />
                         <GameInfo>
-                            <h2>{game.title}</h2>
+                            <h2>{game.name}</h2>
                             {released === false
                                 ? game.release === undefined 
                                     ? (<h4>Coming Soon</h4>)
                                     : (<h4>{`Available ${game.release}`}</h4>)
                                 : null
                             }
-                            <h3>€10</h3>
+                            <h3>{`€${Math.round(Math.random() * Math.random() * 70)},99`}</h3>
                         </GameInfo>
                     </GameItem>
                 ))}

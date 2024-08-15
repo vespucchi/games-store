@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Outlet, Link, useLoaderData, Form, redirect, useNavigation, useSubmit, } from "react-router-dom";
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { ChevronRight } from 'lucide-react';
 
 
 const Container = styled.div`
@@ -10,21 +11,23 @@ const Container = styled.div`
     gap: 20px;
 `
 
-const Heading = styled.div`
+const HeadingContainer = styled.div`
     color: white;
     width: 100%;
+`;
 
+const Heading = styled(Link)`
+    width: fit-content;
     display: flex;
     align-items: center;
+    gap: 4px;
 
-    & > h1 {
-        font-size: 1.5rem;
+    & > svg {
+        transition: transform 0.1s ease-in;
     }
 
-    & > div {
-        margin-left: auto;
-        display: flex;
-        gap: 10px;
+    &:hover > svg {
+        transform: translateX(4px);
     }
 `;
 
@@ -35,7 +38,7 @@ const Title = styled.h1`
 const GamesCarouselSwiper = styled.div`
     min-height: 400px;
 
-    --gap: 15px;
+    --gap: 16px;
 
     display: grid;
     grid-template-columns: repeat(6, calc(calc(100% - calc(var(--gap) * 5))/ 6));
@@ -55,7 +58,7 @@ const GarouselItem = styled(Link)`
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 3fr 1fr;
-    gap: 10px;
+    gap: 8px;
 
     &:hover > *,
     &:focus > * {
@@ -65,6 +68,8 @@ const GarouselItem = styled(Link)`
 
 const GameImage = styled.div`
     border-radius: 10px;
+    background-size: cover;
+    background-position: center;
 
     &:hover,
     &:focus {
@@ -75,7 +80,7 @@ const GameImage = styled.div`
 const GameInfo = styled.div`
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 8px;
 
     color: white;
     padding: 0px 10px 10px 10px;
@@ -97,26 +102,27 @@ const GameInfo = styled.div`
 
 export default function CarouselSwiperSlider({ games, title }) {
     const collectionPath = title.replaceAll(' ', '-').toLowerCase();
+    const sliceArrayAtIndex = Math.random() * 14;
 
     return (
         <Container aria-label={title}>
-            <Heading aria-label='Heading' >
-                <Link to={`/collection/${collectionPath}`}>
+            <HeadingContainer>
+                <Heading to={`/collection/${collectionPath}`} aria-label='Heading' >
                     <Title>{title}</Title>
-                </Link>
-                {/* TODO: add arrow icon */}
-            </Heading>
+                    <ChevronRight size={30} />
+                </Heading>
+            </HeadingContainer>
 
             <GamesCarouselSwiper aria-label='Games carousel swiper slider' id='swiper-slider'>
-                {games.map((game) => (
-                    <GarouselItem to={`/game/${game.title}`} aria-label='Game item' key={game.title}>
+                {games.slice(sliceArrayAtIndex, sliceArrayAtIndex + 6).map((game) => (
+                    <GarouselItem to={`/game/${game.name.replaceAll(' ', '-').toLowerCase()}`} aria-label='Game item' key={game.id}>
                         <GameImage style={{
-                            backgroundImage: `url(${game.image})`
+                            backgroundImage: `url(${game.background_image})`
                         }} />
                         <GameInfo>
                             <h3>Base Game</h3>
-                            <h2>{game.title}</h2>
-                            <p>€9,99</p>
+                            <h2>{game.name}</h2>
+                            <p>{`€${Math.round(Math.random() * Math.random() * 70)},99` }</p>
                         </GameInfo>
                     </GarouselItem>
                 ))}

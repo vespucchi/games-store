@@ -30,13 +30,6 @@ const SelectedGame = styled.div`
     }
 `;
 
-// const ActiveImage = styled.img`
-//     background-size: cover;
-//     background-position: center;
-//     width: 100%;
-//     height: 100%;
-// `;
-
 const GamesQueue = styled.div`
     height: 100%;
     padding: 0;
@@ -57,12 +50,13 @@ const QueueImage = styled.div`
     border-radius: 5px;
 `;
 
-const QueueGameButton = styled.button`
+const QueueGameItem = styled.button`
     display: grid;
     grid-template-columns: 2fr 4fr;
     grid-template-rows: 1fr;
     align-items: center;
     justify-items: start;
+    text-align: start;
 
     box-sizing: border-box;
     padding: 4% 5%;
@@ -103,7 +97,7 @@ export default function HomeSlider({ games }) {
 
     useEffect(() => {
         const activeTimeout = setTimeout(() => {
-            if (activeGameIndex === games.length - 1) setActiveGameIndex(0);
+            if (activeGameIndex === 5) setActiveGameIndex(0);
             else setActiveGameIndex(currentIndex => currentIndex + 1);
         }, 5000);
         return (() => clearTimeout(activeTimeout));
@@ -112,15 +106,15 @@ export default function HomeSlider({ games }) {
     return (
         <GridContainer>
             {/* TO DO: on click open game in store */}
-            <SelectedGame role='button' aria-label='Selected game tab in carousal' id={`tab-${activeGameIndex}`} style={{ backgroundImage: `url(${games[activeGameIndex].image})` }} />
+            <SelectedGame role='button' aria-label='Selected game tab in carousal' id={`tab-${activeGameIndex}`} style={{ backgroundImage: `url(${games[activeGameIndex].background_image})` }} />
 
             <GamesQueue role='tablist' aria-label='Games tabs in carousal'>
-                {games.map((game, index) => (
-                    <QueueGameButton key={game.title} role="tab" aria-selected={activeGameIndex === index ? true : false} aria-label={`tab-${index}`} onClick={() => setActiveGameIndex(index)}>
-                        <QueueImage style={{ backgroundImage: `url(${game.image})` }} />
-                        {game.title}
+                {games.slice(0, 6).map((game, index) => (
+                    <QueueGameItem key={game.id} role="tab" aria-selected={activeGameIndex === index ? true : false} aria-label={`tab-${index}`} onClick={() => setActiveGameIndex(index)}>
+                        <QueueImage style={{ backgroundImage: `url(${game.short_screenshots[0].image})` }} />
+                        {game.name}
                         {activeGameIndex === index ? <div className={styles.carouselProgress}></div> : null}
-                    </QueueGameButton>
+                    </QueueGameItem>
                 ))}
             </GamesQueue>
         </GridContainer>
