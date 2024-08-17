@@ -13,6 +13,7 @@ const Container = styled.div`
     display: flex;
     flex-direction: column;
     gap: 16px;
+
     
     & * {
         font-size: 1.2rem;
@@ -48,12 +49,7 @@ const PlatformItem = styled.button`
     color: white;
     font-weight: 600;
 
-    cursor: pointer;
-
-    &.active {
-        color: #ddd;
-        border-bottom: 3px solid #0078f2;
-    }
+    border-bottom: 3px solid #0078f2;
 `;
 
 const MinRecRequirements = styled.div`
@@ -82,23 +78,13 @@ const RequirementInfo = styled.h2`
 `
 
 export default function GameRequirements({ gameInfo }) {
-    const [selectedPlatformId, setSelectedPlatformId] = useState(4);
 
     return (
         <Container>
             <Title>{gameInfo.data.name} System Requirements</Title>
             <RequirementsContainer>
                 <Platforms>
-                    {gameInfo.data.platforms.filter((platform) => platform.platform.id === 4).map((platform) => (
-                        <PlatformItem key={platform.platform.id} 
-                            className={platform.platform.id === selectedPlatformId ? 'active' : null}
-                            onClick={() => setSelectedPlatformId(platform.platform.id)}>Windows</PlatformItem>
-                    ))}
-                    {gameInfo.data.platforms.filter((platform) => platform.platform.id !== 4).map((platform) => (
-                        <PlatformItem key={platform.platform.id} 
-                            className={platform.platform.id === selectedPlatformId ? 'active' : null}
-                            onClick={() => setSelectedPlatformId(platform.platform.id)}>{platform.platform.name}</PlatformItem>
-                    ))}
+                    <PlatformItem>Windows</PlatformItem>
                 </Platforms>
                 <MinRecRequirements>
                     <RequirementType>

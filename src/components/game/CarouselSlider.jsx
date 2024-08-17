@@ -7,6 +7,7 @@ import { ChevronLeft } from 'lucide-react';
 const CarousalContainer = styled.div`
     width: 100%;
     height: 80%;
+    margin-top: -30px;
 
     display: grid;
     grid-template-columns: 1fr;
@@ -116,7 +117,7 @@ export default function CarouselSlider({ images }) {
 
     useEffect(() => {
         if (images.length > 5) {
-            images.splice(5, images.length - 5);
+            images.splice(5, images.length - 6);
         }
     }, [images]);
     

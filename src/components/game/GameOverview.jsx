@@ -9,7 +9,6 @@ const Container = styled.div`
     width: 100%;
     min-height: 50%;
     height: fit-content;
-    border: 1px solid white;
     color: white;
     box-sizing: border-box;
     padding: 0% 2%;
@@ -21,21 +20,6 @@ const Container = styled.div`
     & * {
         font-size: 1.2rem;
     }
-`;
-
-const Heading = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-`;
-
-const Title = styled.h1`
-    font-size: 3rem;
-`
-
-const Rating = styled.p`
-    font-weight: 600;
-    font-size: 1.2rem;
 `;
 
 const Desc = styled.p`
@@ -66,7 +50,7 @@ const Genre = styled(Link)`
     padding: 4px 6px;
     border-radius: 5px;
     font-weight: 600;
-`
+`;
 
 
 export default function GameOverview({ gameInfo }) {
@@ -80,10 +64,6 @@ export default function GameOverview({ gameInfo }) {
 
     return (
         <Container>
-            <Heading>
-                <Title>{gameInfo.data.name}</Title>
-                <Rating>{gameInfo.data.rating}</Rating>
-            </Heading>
             <CarouselSlider images={gameInfo.screenshots} />
             <Desc>{gameInfo.data.description_raw}</Desc>
             <GenresContainer>
