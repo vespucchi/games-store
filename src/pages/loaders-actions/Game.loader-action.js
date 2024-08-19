@@ -1,3 +1,4 @@
+import { defer } from 'react-router-dom';
 import axios from 'axios';
 import addWishlist from './helpers/addWishlist';
 import removeWishlist from './helpers/removeWishlist';
@@ -10,12 +11,14 @@ export async function loader({ params }) {
     const gameId = splitTitle[splitTitle.length - 1];
 
     console.log('fetching game');
-    const data = await axios.get(`https://api.rawg.io/api/games/${gameId}?key=${import.meta.env.VITE_RAWG_API_KEY0}`, { type: 'get' }).then(res => res.data);
-    const screenshots = await axios.get(`https://api.rawg.io/api/games/${gameId}/screenshots?key=${import.meta.env.VITE_RAWG_API_KEY0}`, { type: 'get' }).then(res => res.data.results);
+    let data = axios.get(`https://api.rawg.io/api/games/${gameId}?key=${import.meta.env.VITE_RAWG_API_KEY0}`, { type: 'get' }).then(res => res.data);
+    const screenshots = axios.get(`https://api.rawg.io/api/games/${gameId}/screenshots?key=${import.meta.env.VITE_RAWG_API_KEY0}`, { type: 'get' }).then(res => res.data.results);
 
-    const gameInfo = { data, screenshots }
+    const gameInfo = Promise.all([data, screenshots]).then((values) => {
+        return { data: values[0], screenshots: values[1]};
+    });
 
-    return gameInfo;
+    return defer({gameInfo});
 };
 
 export async function action({ request }) {
@@ -38,5 +41,5 @@ export async function action({ request }) {
         return removeCart(gameData.id);
     } 
 
-    return request;
+    throw new Error('Action failed');
 };

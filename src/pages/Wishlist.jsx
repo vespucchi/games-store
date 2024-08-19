@@ -164,12 +164,11 @@ const CartLink = styled(Link)`
 export default function WishlistPage() {
     const data = useLoaderData();
 
-    console.log(data)
-
     return (
         <Container>
             <Title>My Wishlist</Title>
-            <GamesList>
+            {data.gamesData &&
+                <GamesList>
                 {data.gamesData.map((game, index) => (
                     <GameItem key={index} >
                         <GameInfo>
@@ -202,14 +201,16 @@ export default function WishlistPage() {
                         <HrLine />
                         <GameBtns method='post' action='./'>
                             <RemoveBtn type='submit' name='remove-wishlist' value={JSON.stringify(game)}>Remove</RemoveBtn>
-                            {data.cartIds.includes(game.id)
-                                ? <CartLink to='../cart'>View In Cart</CartLink>
+                            {data.cartIds ? data.cartIds.includes(game.id)
+                                    ? <CartLink to='../cart'>View In Cart</CartLink>
+                                    : <CartBtn type='submit' name='add-cart' value={JSON.stringify(game)}>Add To Cart</CartBtn>
                                 : <CartBtn type='submit' name='add-cart' value={JSON.stringify(game)}>Add To Cart</CartBtn>
                             }
                         </GameBtns>
                     </GameItem>
                 ))}
-            </GamesList>
+                </GamesList>
+            }
         </Container>
     )
 }
