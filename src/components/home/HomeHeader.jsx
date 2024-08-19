@@ -1,6 +1,8 @@
-import Search from "../global/navbar/Search";
+import Search from "./Search";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
+import { useEffect } from "react";
+import PropTypes from 'prop-types';
 
 const Header = styled.div`
     width: 100%;
@@ -25,14 +27,47 @@ const Link = styled(NavLink)`
     &:focus-visible:not(.active) {
         color: #d1d1d1;
     }
+
+    &:nth-of-type(3) {
+        margin-left: auto;
+    }
 `;
 
-export default function HomeHeader() {
+const Cart = styled(Link)`
+    display: flex;
+    align-items: center;
+    gap: 8px;
+`;
+
+const CartCountDiv = styled.div`
+    background-color: #26bbff;
+    color: black;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    font-weight: bold;
+    box-shadow: 0px 0px 0px 2px rgb(18, 18, 18);
+    padding: 2px 10px;
+`;
+
+export default function HomeHeader({ cartCount }) {
+
     return (
         <Header>
             <Search />
             <Link to='/'>Discover</Link>
             <Link to='/browse'>Browse</Link>
+            <Link to='/wishlist'>Wishlist</Link>
+            <Cart to='/cart'>Cart {cartCount !== 0 && (
+                <CartCountDiv>
+                    {cartCount}
+                </CartCountDiv>
+            )}</Cart>
         </Header>
     )
 }
+
+HomeHeader.propTypes = {
+    cartCount: PropTypes.number,
+};
