@@ -5,7 +5,6 @@ const SkeletonLoader = () => (
         speed={1}
         width='100%'
         height='100%'
-        viewBox="0 0 100% 100%"
         backgroundColor="#f3f3f31a"
         foregroundColor="#f3f3f328"
     >

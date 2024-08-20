@@ -1,14 +1,14 @@
 import { useState, useEffect, Suspense } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { useLoaderData, Await } from 'react-router-dom';
+import { useLoaderData, useRouteLoaderData, Await } from 'react-router-dom';
 import axios from 'axios';
 import GameOverview from '../components/game/GameOverview';
 import GameRequirements from '../components/game/GameRequirements';
 import GameSidebar from '../components/game/GameSidebar';
 import { Rating } from '@mui/material';
 import StarIcon from '@mui/icons-material/Star';
-import SkeletonLoader from '../components/skeleton-loaders/gameSkeleton';
+import SkeletonLoader from './skeleton-loaders/GameSkeleton';
 
 const Container = styled.div`
     min-height: 100vh;
@@ -63,9 +63,15 @@ const SkeletonContainer = styled.div`
     align-items: start;
 `
 
+let gamePrice;
+
 export default function GamePage() {
     const data = useLoaderData();
-    console.log(data)
+
+    useEffect(() => {
+        gamePrice = `€${Math.round(Math.random() * Math.random() * 70)},99`;
+    }, []);
+    
     return (
             <Suspense fallback={
                 <SkeletonContainer>
@@ -91,7 +97,7 @@ export default function GamePage() {
                                     </RatingContainer>
                                 </Heading>
                                 <GameOverview gameInfo={resolvedGameInfo} />
-                                <GameSidebar gameInfo={resolvedGameInfo} />
+                                <GameSidebar gameInfo={{...resolvedGameInfo.data, price: gamePrice}} />
                                 <GameRequirements gameInfo={resolvedGameInfo} />
                             </Container>
                         )

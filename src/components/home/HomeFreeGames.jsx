@@ -130,11 +130,11 @@ export default function HomeFreeGames({ games }) {
         <Container>
             <Header>
                 <Heading>Free Games</Heading>
-                <ViewMoreBtn to='/collection/free-games'>View More</ViewMoreBtn>
+                <ViewMoreBtn to='/browse/collection/free-games'>View More</ViewMoreBtn>
             </Header>
             <CardsContainer>
                 {games.slice(sliceArrayAtIndex, sliceArrayAtIndex + 5).map((game, index) => (
-                    <CardItem to={`/game/${game.name.replaceAll(' ', '-').toLowerCase()}`} aria-label='Game item' key={game.id}>
+                    <CardItem to={`/game/${game.name.replaceAll(' ', '-').toLowerCase()}-${game.id}`} aria-label='Game item' key={game.id}>
                         <CardImage style={{
                             backgroundImage: `url(${game.background_image})`
                         }}>

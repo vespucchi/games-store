@@ -105,14 +105,14 @@ export default function VerticalCategory({ title, games, released }) {
     return (
         <CategoryItem>
             <HeadingContainer>
-                <Heading to={`/collection/${collectionPath}`} aria-label='Heading' >
+                <Heading to={`/browse/collection/${collectionPath}`} aria-label='Heading' title={title}>
                     <Title>{title}</Title>
                     <ChevronRight />
                 </Heading>
             </HeadingContainer>
             <GamesList>
                 {games.slice(sliceArrayAtIndex, sliceArrayAtIndex + 5).map((game) => (
-                    <GameItem key={game.name} to={`/game/${game.name.replaceAll(' ', '-').toLowerCase()}`}>
+                    <GameItem key={game.name} to={`/game/${game.name.replaceAll(' ', '-').toLowerCase()}-${game.id}`}>
                         <GameImage style={{
                             backgroundImage: `url(${game.background_image})`
                         }} />

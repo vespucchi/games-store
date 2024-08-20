@@ -55,13 +55,6 @@ const Genre = styled(Link)`
 
 export default function GameOverview({ gameInfo }) {
 
-
-    // title
-    // carousal
-    // desc
-    // genres
-    // rating
-
     return (
         <Container>
             <CarouselSlider images={gameInfo.screenshots} />

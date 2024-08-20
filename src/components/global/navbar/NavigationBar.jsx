@@ -1,6 +1,6 @@
 import React from 'react';
 import { Outlet, Link, useLoaderData, Form, redirect, useNavigation, useSubmit, } from "react-router-dom";
-import Search from './Search';
+import Search from '../../home/Search';
 import styled from 'styled-components';
 import { Globe } from 'lucide-react';
 
@@ -8,7 +8,7 @@ const Nav = styled.nav`
     height: 100%;
     width: 100%;
     box-sizing: border-box;
-    padding: 15px 20px;
+    padding: 0px 20px 0px 20px;
     background-color: #121216;
 
     display: flex;
@@ -95,7 +95,7 @@ export default function NavigationBar() {
             <Nav>
                 <LinkNav>LOGO</LinkNav>
                 <LinkNav to='/'>STORE</LinkNav>
-                <LinkNav to='/'><Globe size={22} /></LinkNav>
+                <LinkNav onClick={(e) => e.preventDefault()}><Globe size={22} /></LinkNav>
                 <LinkNav to='/profile'>
                     <UserIcon>
                         <UserInitial>u</UserInitial>
@@ -103,7 +103,7 @@ export default function NavigationBar() {
                     </UserIcon>
                     user
                 </LinkNav>
-                <LinkNav to='/'>Download</LinkNav>
+                <LinkNav onClick={(e) => e.preventDefault()}>Download</LinkNav>
             </Nav>
         </header>
     )

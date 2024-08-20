@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { Form } from 'react-router-dom';
+import { Form, useFetcher, useRouteLoaderData } from 'react-router-dom';
 
 const SidebarContainer = styled.div`
     height: fit-content;
@@ -23,8 +23,6 @@ const TypeOfGame = styled.div`
     padding: 4px 6px;
     border-radius: 5px;
     font-weight: 600;
-
-    margin-bottom: -15px;
 `;
 
 const Buttons = styled.div`
@@ -54,7 +52,7 @@ const Btn = styled.button`
         background-color: #636366;
     }
 
-    &:first-of-type:hover {
+    &.buy-now:hover {
         color: #162F3A;
         background-color: #61CDFF;
     }
@@ -89,13 +87,16 @@ const HrLine = styled.hr`
     border-top: 1px solid #ffffff22;
 `;
 
+
 export default function GameSidebar({ gameInfo }) {
+    const fetcher = useFetcher();
+
     const [isWhishlisted, setIsWhislisted] = useState(() => {
         // check if it's already stored in local storage
         if (localStorage.getItem('wishlistIds')) {
             const saved = localStorage.getItem('wishlistIds');
             const games = JSON.parse(saved);
-            return games.includes(gameInfo.data.id);
+            return games.includes(gameInfo.id);
         }
 
         return false;
@@ -106,7 +107,7 @@ export default function GameSidebar({ gameInfo }) {
         if (localStorage.getItem('cartIds')) {
             const saved = localStorage.getItem('cartIds');
             const games = JSON.parse(saved);
-            return games.includes(gameInfo.data.id);
+            return games.includes(gameInfo.id);
         }
 
         return false;
@@ -115,21 +116,21 @@ export default function GameSidebar({ gameInfo }) {
     return (
         <SidebarContainer>
             <TypeOfGame>Base Game</TypeOfGame>
-            {`€${Math.round(Math.random() * Math.random() * 70)},99`}
+            {gameInfo.price}
             <Buttons>
                 <Btn className='buy-now'>Buy Now</Btn>
-                <Form method='post' action='./' onSubmit={() => setIsInCart(!isInCart)}>
+                <fetcher.Form method='post' action='./' onSubmit={() => setIsInCart(!isInCart)}>
                     {isInCart
-                        ? <Btn type='submit' name='remove-cart' value={JSON.stringify(gameInfo.data)}>Remove From Cart</Btn>
-                        : <Btn type='submit' name='add-cart' value={JSON.stringify(gameInfo.data)}>Add To Cart</Btn>
+                        ? <Btn type='submit' name='remove-cart' value={JSON.stringify(gameInfo)}>Remove From Cart</Btn>
+                        : <Btn type='submit' name='add-cart' value={JSON.stringify(gameInfo)}>Add To Cart</Btn>
                     }
-                </Form>
-                <Form method='post' action='./' onSubmit={() => setIsWhislisted(!isWhishlisted)}>
+                </fetcher.Form>
+                <fetcher.Form method='post' action='./' onSubmit={() => setIsWhislisted(!isWhishlisted)}>
                     {isWhishlisted
-                        ? <Btn type='submit' name='remove-wishlist' value={JSON.stringify(gameInfo.data)}>Remove From Wishlist</Btn>
-                        : <Btn type='submit' name='add-wishlist' value={JSON.stringify(gameInfo.data)}>Add To Wishlist</Btn>
+                        ? <Btn type='submit' name='remove-wishlist' value={JSON.stringify(gameInfo)}>Remove From Wishlist</Btn>
+                        : <Btn type='submit' name='add-wishlist' value={JSON.stringify(gameInfo)}>Add To Wishlist</Btn>
                     }
-                </Form>
+                </fetcher.Form>
             </Buttons>
             <GameInfo>
                 <InfoItem>
@@ -139,17 +140,17 @@ export default function GameSidebar({ gameInfo }) {
                 <HrLine />
                 <InfoItem>
                     <p>Developer</p>
-                    <p>{gameInfo.data.developers[0].name}</p>
+                    <p>{gameInfo.developers[0].name}</p>
                 </InfoItem>
                 <HrLine />
                 <InfoItem>
                     <p>Publisher</p>
-                    <p>{gameInfo.data.publishers[0].name}</p>
+                    <p>{gameInfo.publishers[0].name}</p>
                 </InfoItem>
                 <HrLine />
                 <InfoItem>
                     <p>Release Date</p>
-                    <p>{gameInfo.data.released}</p>
+                    <p>{gameInfo.released}</p>
                 </InfoItem>
                 <HrLine />
                 <InfoItem>

@@ -4,8 +4,13 @@ import HomeTrending from '../components/home/HomeTrending';
 import HomeFreeGames from '../components/home/HomeFreeGames';
 import HomeVerticalCategories from '../components/home/HomeVerticalCategories';
 import PropTypes from 'prop-types';
+import { useLoaderData, useOutletContext } from 'react-router-dom';
 
-export default function DiscoverPage({ games }) {
+
+
+export default function DiscoverPage() {
+    const games = useOutletContext();
+
     return (
         <>
             <HomeSlider games={games} />
@@ -18,5 +23,4 @@ export default function DiscoverPage({ games }) {
 }
 
 DiscoverPage.propTypes = {
-    games: PropTypes.array.isRequired,
 };

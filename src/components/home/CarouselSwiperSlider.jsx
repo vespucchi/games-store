@@ -107,7 +107,7 @@ export default function CarouselSwiperSlider({ games, title }) {
     return (
         <Container aria-label={title}>
             <HeadingContainer>
-                <Heading to={`/collection/${collectionPath}`} aria-label='Heading' >
+                <Heading to={`/browse/collection/${collectionPath}`} aria-label='Heading' >
                     <Title>{title}</Title>
                     <ChevronRight size={30} />
                 </Heading>
@@ -115,14 +115,14 @@ export default function CarouselSwiperSlider({ games, title }) {
 
             <GamesCarouselSwiper aria-label='Games carousel swiper slider' id='swiper-slider'>
                 {games.slice(sliceArrayAtIndex, sliceArrayAtIndex + 6).map((game) => (
-                    <GarouselItem to={`/game/${game.name.replaceAll(' ', '-').toLowerCase()}`} aria-label='Game item' key={game.id}>
+                    <GarouselItem to={`/game/${game.name.replaceAll(' ', '-').toLowerCase()}-${game.id}`} aria-label='Game item' key={game.id}>
                         <GameImage style={{
                             backgroundImage: `url(${game.background_image})`
                         }} />
                         <GameInfo>
                             <h3>Base Game</h3>
                             <h2>{game.name}</h2>
-                            <p>{`€${Math.round(Math.random() * Math.random() * 70)},99` }</p>
+                            <p>{game.price}</p>
                         </GameInfo>
                     </GarouselItem>
                 ))}

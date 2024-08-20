@@ -1,14 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import styles from './css-modules/home-helper.module.css';
+import styles from '../../pages/css-modules/home-helper.module.css';
 
 const GridContainer = styled.div`
     max-height: 700px;
     height: 70vh;
     display: grid;
     grid-template-columns: 8fr 2fr;
-    margin-top: -50px;
 `;
 
 const SelectedGame = styled.div`
@@ -22,7 +21,7 @@ const SelectedGame = styled.div`
     cursor: pointer;
 
     background-repeat: no-repeat;
-    background-position: 50% 50%;
+    background-position: center;
     background-size: cover;
 
     &:hover {
@@ -87,10 +86,6 @@ const QueueGameItem = styled.button`
         transform: scale(1.05);
     }
 `;
-
-
-
-
 
 export default function HomeSlider({ games }) {
     const [activeGameIndex, setActiveGameIndex] = useState(0);
