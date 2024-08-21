@@ -301,7 +301,7 @@ export default function WishlistPage() {
     return (
         <Container>
             <Title>My Wishlist</Title>
-            {data.gamesData &&
+            {data.gamesData.length !== 0 &&
                 <>
                     <GamesList>
                     {gamesList.map((game, index) => (

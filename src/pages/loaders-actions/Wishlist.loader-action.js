@@ -3,8 +3,8 @@ import addCart from './helpers/addCart';
 import removeCart from './helpers/removeCart';
 
 export async function loader() {
-    const gamesData = await JSON.parse(localStorage.getItem('wishlistData'));
-    const cartIds = await JSON.parse(localStorage.getItem('cartIds'));
+    const gamesData = await JSON.parse(localStorage.getItem('wishlistData')) || [];
+    const cartIds = await JSON.parse(localStorage.getItem('cartIds')) || [];
 
     return { gamesData, cartIds };
 };
