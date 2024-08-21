@@ -203,7 +203,7 @@ export default function CartPage() {
     return (
         <Container>
             <Title>My Cart ({data.cartIds.length})</Title>
-            {data.cartIds &&
+            {data.cartIds.length !== 0 &&
                 <>
                     <GamesList>
                         {data.gamesData.map((game, index) => (
