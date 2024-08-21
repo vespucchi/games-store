@@ -1,7 +1,6 @@
 import Search from "./Search";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
-import { useEffect } from "react";
 import PropTypes from 'prop-types';
 
 const Header = styled.div`

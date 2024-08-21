@@ -58,11 +58,11 @@ export default function GameOverview({ gameInfo }) {
     return (
         <Container>
             <CarouselSlider images={gameInfo.screenshots} />
-            <Desc>{gameInfo.data.description_raw}</Desc>
+            <Desc>{gameInfo.data.description_raw && gameInfo.data.description_raw}</Desc>
             <GenresContainer>
                 <p>Genres</p>
                 <GenresButtons>
-                    {gameInfo.data.genres.map((genre) => (
+                    {gameInfo.data.genres.length !== 0 && gameInfo.data.genres.map((genre) => (
                         <Genre key={genre.id} >{genre.name}</Genre>
                     ))}
                 </GenresButtons>

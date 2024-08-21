@@ -140,17 +140,17 @@ export default function GameSidebar({ gameInfo }) {
                 <HrLine />
                 <InfoItem>
                     <p>Developer</p>
-                    <p>{gameInfo.developers[0].name}</p>
+                    <p>{gameInfo.developers.length !== 0 ? gameInfo.developers[0].name : '-'}</p>
                 </InfoItem>
                 <HrLine />
                 <InfoItem>
                     <p>Publisher</p>
-                    <p>{gameInfo.publishers[0].name}</p>
+                    <p>{gameInfo.publishers.length !== 0 ? gameInfo.publishers[0].name : '-'}</p>
                 </InfoItem>
                 <HrLine />
                 <InfoItem>
                     <p>Release Date</p>
-                    <p>{gameInfo.released}</p>
+                    <p>{gameInfo.released ? gameInfo.released : '-'}</p>
                 </InfoItem>
                 <HrLine />
                 <InfoItem>

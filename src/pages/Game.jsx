@@ -1,8 +1,6 @@
-import { useState, useEffect, Suspense } from 'react';
+import { useEffect, Suspense } from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
-import { useLoaderData, useRouteLoaderData, Await } from 'react-router-dom';
-import axios from 'axios';
+import { useLoaderData, Await } from 'react-router-dom';
 import GameOverview from '../components/game/GameOverview';
 import GameRequirements from '../components/game/GameRequirements';
 import GameSidebar from '../components/game/GameSidebar';
@@ -82,6 +80,8 @@ export default function GamePage() {
                     {
                         (resolvedGameInfo) => (
                             <Container>
+                                {console.log(resolvedGameInfo)}
+
                                 <Heading>
                                     <Title>{resolvedGameInfo.data.name}</Title>
                                     <RatingContainer>

@@ -1,4 +1,4 @@
-import { Outlet, Link, useLoaderData, Form, redirect, useNavigation, useSubmit, } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styled from 'styled-components';
 import { Facebook, Youtube, Twitter, ChevronUp } from 'lucide-react';
 

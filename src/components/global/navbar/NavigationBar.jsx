@@ -1,6 +1,4 @@
-import React from 'react';
-import { Outlet, Link, useLoaderData, Form, redirect, useNavigation, useSubmit, } from "react-router-dom";
-import Search from '../../home/Search';
+import { Link } from "react-router-dom";
 import styled from 'styled-components';
 import { Globe } from 'lucide-react';
 

@@ -1,6 +1,5 @@
 import axios from 'axios';
 
-
 export async function loader() {
     console.log('fetching');
     let data;

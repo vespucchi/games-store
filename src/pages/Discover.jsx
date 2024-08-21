@@ -3,8 +3,7 @@ import HomeNewReleases from '../components/home/HomeNewReleases';
 import HomeTrending from '../components/home/HomeTrending';
 import HomeFreeGames from '../components/home/HomeFreeGames';
 import HomeVerticalCategories from '../components/home/HomeVerticalCategories';
-import PropTypes from 'prop-types';
-import { useLoaderData, useOutletContext } from 'react-router-dom';
+import { useOutletContext } from 'react-router-dom';
 
 
 
