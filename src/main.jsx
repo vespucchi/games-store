@@ -10,6 +10,7 @@ import { loader as AppLoader } from './pages/loaders-actions/App.loader-action';
 import ErrorPage from './pages/Error.jsx';
 import DiscoverPage from './pages/Discover.jsx';
 import BrowsePage from './pages/Browse.jsx';
+import { loader as BrowseLoader } from './pages/loaders-actions/Browse.loader-action';
 import CollectionPage from './pages/Collection.jsx';
 import { loader as CollectionLoader } from './pages/loaders-actions/Collection.loader-action';
 import GamePage from './pages/Game.jsx';
@@ -40,6 +41,7 @@ const router = createBrowserRouter([
                     {
                         path: "browse",
                         element: <BrowsePage />,
+                        loader: BrowseLoader,
                     },
                     {
                         path: "browse/collection/:collectionTitle",
